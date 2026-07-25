@@ -298,6 +298,15 @@
 
     /* ------- De vier rollen ------- */
 
+    .rollen-kop {
+      color: var(--gold);
+      text-align: center;
+      font-size: clamp(1.45rem, 5.5vw, 1.9rem);
+      letter-spacing: 0.12em;
+      margin-bottom: 2.25rem;
+      text-shadow: 0 0 24px rgba(111, 169, 221, 0.25);
+    }
+
     .portretten {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -483,6 +492,7 @@
 
     <!-- 4b. De vier rollen -->
     <section aria-label="De vier rollen">
+      <h2 class="rollen-kop">Wie speel jij?</h2>
       <div class="portretten">
         <figure>
           <img src="beelden/felix.jpg" alt="Portret van Felix" loading="lazy">
