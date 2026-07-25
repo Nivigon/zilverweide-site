@@ -19,8 +19,9 @@
      dan het posterbeeld eronder zodra dat laadt.
 
   3. [Placeholder: instagram-url]
-     Waar: het href-attribuut van de knop "Volg op Instagram".
-     Vervangen: zet daar de volledige Instagram-url,
+     Waar: op twee plekken in de afsluiting: het href-attribuut van de
+     knop "Volg op Instagram" en het href-attribuut van het
+     Instagram-logo eronder. Op beide plekken dezelfde url invullen,
      bijvoorbeeld href="https://www.instagram.com/zilverweide".
 
   4. [Placeholder: mailadres]
@@ -30,11 +31,12 @@
 
   DEFINITIEF (geen plekhouders):
   - beelden/rozensplash.jpeg  (herobeeld, titel zit in het beeld zelf)
-  - beelden/heks.jpg          (los dreigingsbeeld tussen verhaal en portretten)
+  - beelden/rozenimage1.jpeg  (los dreigingsbeeld tussen verhaal en portretten)
   - beelden/felix.jpg, fenna.jpg, jan.jpg, kelly.jpg  (de vier rollen)
   - beelden/og.jpg            (linkvoorbeeldbeeld, 1200x630, uitsnede van heks.jpg)
+  - beelden/Instagram_Glyph_Gradient.svg  (Instagram-logo in de afsluiting)
   - de favicon (gouden roosje als inline SVG, mag later vervangen worden)
-  (beelden/rozenimage1.jpeg en beelden/splash.jpg staan niet meer op de pagina)
+  (beelden/heks.jpg en beelden/splash.jpg staan niet meer op de pagina)
 -->
 <html lang="nl">
 <head>
@@ -358,8 +360,36 @@
       box-shadow: 0 0 26px rgba(201, 168, 76, 0.35);
     }
 
+    /* Pijl van de knop naar het Instagram-logo */
+    .pijl {
+      display: block;
+      width: 1.4rem;
+      height: 2.6rem;
+      margin: 1.1rem auto 0.9rem;
+      color: var(--gold-dim);
+    }
+
+    .insta-logo {
+      display: inline-block;
+      line-height: 0;
+      border-radius: 22%;
+      transition: filter 0.25s ease, transform 0.25s ease;
+    }
+
+    .insta-logo img {
+      width: 4.5rem;
+      height: 4.5rem;
+      display: block;
+    }
+
+    .insta-logo:hover,
+    .insta-logo:focus-visible {
+      filter: drop-shadow(0 0 14px rgba(111, 169, 221, 0.45));
+      transform: scale(1.05);
+    }
+
     .volgzin {
-      margin-top: 1.1rem;
+      margin-top: 1.4rem;
       font-style: italic;
       color: var(--parchment);
     }
@@ -404,7 +434,8 @@
 
     @media (prefers-reduced-motion: reduce) {
       .hero { animation: none; }
-      .film-start .play, .knop-instagram { transition: none; }
+      .film-start .play, .knop-instagram, .insta-logo { transition: none; }
+      .insta-logo:hover, .insta-logo:focus-visible { transform: none; }
     }
   </style>
 </head>
@@ -456,7 +487,7 @@
         50% = midden, 100% = rechts/onder). Voorbeeld: "35% 20%" schuift
         de uitsnede naar links en omhoog. Aanpassen in het style-attribuut.
       -->
-      <img src="beelden/heks.jpg" style="object-position: 50% 35%;" alt="Een gehoornde gedaante met gloeiende blauwe ogen onder een kap" loading="lazy">
+      <img src="beelden/rozenimage1.jpeg" style="object-position: 60% 35%;" alt="Een gedaante met gloeiende blauwe ogen houdt een lichtgevende blauwe roos vast" loading="lazy">
     </section>
 
     <!-- 4b. De vier rollen -->
@@ -486,6 +517,12 @@
     <!-- 5. Afsluiting met acties -->
     <section class="afsluiting" aria-label="Volgen en meespelen">
       <a class="knop-instagram" href="[Placeholder: instagram-url]">Volg op Instagram</a>
+      <svg class="pijl" viewBox="0 0 24 44" aria-hidden="true">
+        <path d="M12 2v34m0 0l-8-9m8 9l8-9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <a class="insta-logo" href="[Placeholder: instagram-url]" aria-label="Naar het Instagram-account van De Rozen van Zilverweide">
+        <img src="beelden/Instagram_Glyph_Gradient.svg" alt="">
+      </a>
       <p class="volgzin">Volg ons en hoor als eerste wanneer het dorp zijn poorten opent.</p>
       <p class="playtest">Eerder meespelen? Deze zomer spelen de eerste groepen. <a href="mailto:[Placeholder: mailadres]?subject=Aanmelding%20playtest%20Zilverweide">Stuur een berichtje</a> en test het mysterie als een van de eersten.</p>
     </section>
