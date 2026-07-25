@@ -328,43 +328,30 @@
     .afsluiting { text-align: center; }
 
     .knop-instagram {
-      display: inline-block;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.7rem;
       font-family: Cinzel, Georgia, serif;
       font-size: 1.05rem;
       letter-spacing: 0.1em;
       color: var(--bg);
       background: var(--gold);
       text-decoration: none;
-      padding: 1rem 2.4rem;
+      padding: 0.9rem 2.2rem;
       border-radius: 3px;
       transition: background-color 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .knop-instagram img {
+      width: 1.5rem;
+      height: 1.5rem;
+      display: block;
     }
 
     .knop-instagram:hover,
     .knop-instagram:focus-visible {
       background: #d9bb64;
       box-shadow: 0 0 26px rgba(201, 168, 76, 0.35);
-    }
-
-    .insta-logo {
-      display: block;
-      width: fit-content;
-      margin: 1.6rem auto 0;
-      line-height: 0;
-      border-radius: 22%;
-      transition: filter 0.25s ease, transform 0.25s ease;
-    }
-
-    .insta-logo img {
-      width: 4.5rem;
-      height: 4.5rem;
-      display: block;
-    }
-
-    .insta-logo:hover,
-    .insta-logo:focus-visible {
-      filter: drop-shadow(0 0 14px rgba(111, 169, 221, 0.45));
-      transform: scale(1.05);
     }
 
     .volgzin {
@@ -386,11 +373,11 @@
     .playtest a:hover, .playtest a:focus-visible { color: var(--gold); }
 
     .groepsgrootte {
-      margin: 1.1rem auto 0;
-      font-size: 0.85rem;
+      margin: 0 auto 1.6rem;
+      font-size: 1rem;
       font-style: italic;
-      color: rgba(245, 234, 214, 0.55);
-      max-width: 28rem;
+      color: rgba(245, 234, 214, 0.8);
+      max-width: 30rem;
     }
 
     footer {
@@ -421,8 +408,7 @@
 
     @media (prefers-reduced-motion: reduce) {
       .hero { animation: none; }
-      .film-start .play, .knop-instagram, .insta-logo { transition: none; }
-      .insta-logo:hover, .insta-logo:focus-visible { transform: none; }
+      .film-start .play, .knop-instagram { transition: none; }
     }
   </style>
 </head>
@@ -503,13 +489,13 @@
 
     <!-- 5. Afsluiting met acties -->
     <section class="afsluiting" aria-label="Volgen en meespelen">
-      <a class="knop-instagram" href="https://www.instagram.com/zilverweide">Volg op Instagram</a>
-      <a class="insta-logo" href="https://www.instagram.com/zilverweide" aria-label="Naar het Instagram-account van De Rozen van Zilverweide">
+      <p class="groepsgrootte">Meestal gespeeld met groepen van 4 tot 8. Met meer of minder? Stuur gerust een berichtje, dan kijken we wat past.</p>
+      <a class="knop-instagram" href="https://www.instagram.com/zilverweide">
         <img src="beelden/Instagram_Glyph_Gradient.svg" alt="">
+        Volg op Instagram
       </a>
       <p class="volgzin">Volg ons en hoor als eerste wanneer het dorp zijn poorten opent.</p>
       <p class="playtest">Eerder meespelen? Deze zomer spelen de eerste groepen. <a href="mailto:speel@zilverweide.nl?subject=Aanmelding%20playtest%20Zilverweide">Stuur een berichtje</a> en test het mysterie als een van de eersten.</p>
-      <p class="groepsgrootte">Meestal gespeeld met groepen van 4 tot 8. Met meer of minder? Stuur gerust een berichtje, dan kijken we wat past.</p>
     </section>
 
   </main>
