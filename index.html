@@ -18,28 +18,23 @@
      plekhoudervlak met de play-knop blijft gewoon werken en toont
      dan het posterbeeld eronder zodra dat laadt.
 
-  3. [Placeholder: sfeerbeeld 2] t/m [Placeholder: sfeerbeeld 4]
-     Waar: de sfeerbeeldenreeks (zoek op "sfeerbeeld 2").
-     Vervangen: haal per beeld de <div class="plekhouder">-regel weg
-     en haal de commentaartekens rond de <img>-regel erboven weg,
-     vul dan het src-attribuut in. De uitsnede stuur je per beeld
-     met object-position (uitleg staat als commentaar bij heks.jpg).
-
-  4. [Placeholder: instagram-url]
+  3. [Placeholder: instagram-url]
      Waar: het href-attribuut van de knop "Volg op Instagram".
      Vervangen: zet daar de volledige Instagram-url,
      bijvoorbeeld href="https://www.instagram.com/zilverweide".
 
-  5. [Placeholder: mailadres]
+  4. [Placeholder: mailadres]
      Waar: de mailto-link in het playtestzinnetje.
      Vervangen: alleen het adres vervangen, het onderwerp laten staan,
      bijvoorbeeld href="mailto:speel@zilverweide.nl?subject=Aanmelding%20playtest%20Zilverweide".
 
   DEFINITIEF (geen plekhouders):
   - beelden/rozensplash.jpeg  (herobeeld, titel zit in het beeld zelf)
-  - beelden/rozenimage1.jpeg  (eerste sfeerbeeld)
+  - beelden/heks.jpg          (los dreigingsbeeld tussen verhaal en portretten)
+  - beelden/felix.jpg, fenna.jpg, jan.jpg, kelly.jpg  (de vier rollen)
   - beelden/og.jpg            (linkvoorbeeldbeeld, 1200x630, uitsnede van heks.jpg)
   - de favicon (gouden roosje als inline SVG, mag later vervangen worden)
+  (beelden/rozenimage1.jpeg en beelden/splash.jpg staan niet meer op de pagina)
 -->
 <html lang="nl">
 <head>
@@ -293,43 +288,51 @@
       margin-top: 2rem;
     }
 
-    /* ------- Sfeerbeelden ------- */
+    /* ------- De heks: los dreigingsbeeld op volle breedte ------- */
 
-    .sfeer {
-      display: grid;
-      gap: 1.25rem;
+    main section.dreiging {
+      max-width: none;
+      padding: 0;
     }
 
-    .sfeer figure {
+    .dreiging img {
+      display: block;
+      width: 100%;
+      /* Vierkante uitsnede op een smalle telefoon, breed op desktop */
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+    }
+
+    /* ------- De vier rollen ------- */
+
+    .portretten {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .portretten figure {
       margin: 0;
       overflow: hidden;
       border-radius: 4px;
       border: 1px solid rgba(138, 111, 50, 0.35);
+      background: #0a0805;
     }
 
-    .sfeer .beeld {
+    .portretten img {
       display: block;
       width: 100%;
-      /* Staande of vierkante uitsnede op een smalle telefoon */
-      aspect-ratio: 4 / 5;
+      aspect-ratio: 2 / 3;
       object-fit: cover;
     }
 
-    /* ------- Plekhouders (algemeen) ------- */
-
-    .plekhouder {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 100%;
-      aspect-ratio: 4 / 5;
-      background:
-        radial-gradient(ellipse at center, rgba(111, 169, 221, 0.05), transparent 70%),
-        #0a0805;
-      color: var(--gold-dim);
-      font-style: italic;
+    .portretten figcaption {
+      font-family: Cinzel, Georgia, serif;
+      color: var(--gold);
       text-align: center;
-      padding: 1rem;
+      letter-spacing: 0.12em;
+      font-size: 0.95rem;
+      padding: 0.7rem 0.5rem;
     }
 
     /* ------- Afsluiting ------- */
@@ -383,13 +386,14 @@
     /* ------- Bredere schermen ------- */
 
     @media (min-width: 700px) {
-      .sfeer {
-        grid-template-columns: 1fr 1fr;
-        gap: 1.5rem;
-      }
       /* Op bredere schermen meer van het volledige (liggende) beeld tonen */
-      .sfeer .beeld, .sfeer .plekhouder { aspect-ratio: 3 / 2; }
+      .dreiging img { aspect-ratio: 21 / 9; }
+      .portretten {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1.25rem;
+      }
       main section { padding: 4.5rem 2rem; }
+      main section.dreiging { padding: 0; }
     }
 
     @media (min-width: 1100px) {
@@ -443,31 +447,36 @@
       <p>Binnenkort speelbaar.</p>
     </section>
 
-    <hr class="scheiding" aria-hidden="true">
+    <!-- 4a. De heks: los dreigingsbeeld op volle breedte,
+         als scharnier tussen het verhaal en de vier rollen -->
+    <section class="dreiging" aria-label="De heks">
+      <!--
+        object-position bepaalt het middelpunt van de uitsnede.
+        Eerste waarde is horizontaal, tweede verticaal (0% = links/boven,
+        50% = midden, 100% = rechts/onder). Voorbeeld: "35% 20%" schuift
+        de uitsnede naar links en omhoog. Aanpassen in het style-attribuut.
+      -->
+      <img src="beelden/heks.jpg" style="object-position: 50% 35%;" alt="Een gehoornde gedaante met gloeiende blauwe ogen onder een kap" loading="lazy">
+    </section>
 
-    <!-- 4. Sfeerbeelden -->
-    <section aria-label="Sfeerbeelden">
-      <div class="sfeer">
+    <!-- 4b. De vier rollen -->
+    <section aria-label="De vier rollen">
+      <div class="portretten">
         <figure>
-          <!--
-            object-position bepaalt het middelpunt van de uitsnede per beeld.
-            Eerste waarde is horizontaal, tweede verticaal (0% = links/boven,
-            50% = midden, 100% = rechts/onder). Voorbeeld: "35% 20%" schuift
-            de uitsnede naar links en omhoog. Pas dit per <img> aan in het
-            style-attribuut hieronder.
-          -->
-          <img class="beeld" src="beelden/rozenimage1.jpeg" style="object-position: 60% 40%;" alt="Een gedaante met gloeiende blauwe ogen houdt een lichtgevende blauwe roos vast" loading="lazy">
+          <img src="beelden/felix.jpg" alt="Portret van Felix" loading="lazy">
+          <figcaption>Felix</figcaption>
         </figure>
         <figure>
-          <!-- Vervangen: haal de <div> hieronder weg en gebruik in plaats
-               daarvan een <img> zoals bij heks.jpg hierboven. -->
-          <div class="plekhouder">[Placeholder: sfeerbeeld 2]</div>
+          <img src="beelden/fenna.jpg" alt="Portret van Fenna" loading="lazy">
+          <figcaption>Fenna</figcaption>
         </figure>
         <figure>
-          <div class="plekhouder">[Placeholder: sfeerbeeld 3]</div>
+          <img src="beelden/jan.jpg" alt="Portret van Jan" loading="lazy">
+          <figcaption>Jan</figcaption>
         </figure>
         <figure>
-          <div class="plekhouder">[Placeholder: sfeerbeeld 4]</div>
+          <img src="beelden/kelly.jpg" alt="Portret van Kelly" loading="lazy">
+          <figcaption>Kelly</figcaption>
         </figure>
       </div>
     </section>
