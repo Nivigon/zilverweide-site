@@ -6,20 +6,14 @@
   PLEKHOUDERS EN HOE JE ZE VERVANGT
   (elke plekhouder is te vervangen door alleen een bron of link te wijzigen)
 
-  1. [Placeholder: posterbeeld cinematic]
-     Waar: het poster-attribuut op het <video>-element.
-     Vervangen: zet daar het pad naar het posterbeeld,
-     bijvoorbeeld poster="beelden/poster.jpg". Het donkere
-     plekhoudervlak met de play-knop blijft gewoon werken en toont
-     dan het posterbeeld eronder zodra dat laadt.
-
-  2. [Placeholder: mailadres]
+  1. [Placeholder: mailadres]
      Waar: de mailto-link in het playtestzinnetje.
      Vervangen: alleen het adres vervangen, het onderwerp laten staan,
      bijvoorbeeld href="mailto:speel@zilverweide.nl?subject=Aanmelding%20playtest%20Zilverweide".
 
   DEFINITIEF (geen plekhouders):
   - beelden/cinematic.mp4     (de film; laadt pas na een druk op play)
+  - beelden/posterbeeld.jpeg  (posterbeeld van de film)
   - de Instagram-link (https://www.instagram.com/zilverweide, op de knop en het logo)
   - beelden/rozensplash.jpeg  (herobeeld, titel zit in het beeld zelf)
   - beelden/rozenimage1.jpeg  (los dreigingsbeeld tussen verhaal en portretten)
@@ -221,19 +215,13 @@
       inset: 0;
       width: 100%;
       display: flex;
-      flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 1.1rem;
-      background:
-        radial-gradient(ellipse at center, rgba(111, 169, 221, 0.07), transparent 65%),
-        #0a0805;
+      /* Doorzichtig zodat het posterbeeld zichtbaar blijft; lichte
+         verdonkering in het midden houdt de play-knop leesbaar */
+      background: radial-gradient(ellipse at center, rgba(13, 10, 6, 0.4), rgba(13, 10, 6, 0.1) 70%);
       border: none;
       cursor: pointer;
-      font-family: "Crimson Text", Georgia, serif;
-      font-size: 1rem;
-      font-style: italic;
-      color: var(--gold-dim);
     }
 
     .film-start .play {
@@ -459,12 +447,11 @@
           Video begint pas te laden na een druk op play (preload="none").
           Vervangen: alleen poster (op <video>) en src (op <source>) aanpassen.
         -->
-        <video id="film" preload="none" playsinline poster="[Placeholder: posterbeeld cinematic]">
+        <video id="film" preload="none" playsinline poster="beelden/posterbeeld.jpeg">
           <source src="beelden/cinematic.mp4" type="video/mp4">
         </video>
         <button class="film-start" id="film-start" aria-label="Film afspelen">
           <span class="play" aria-hidden="true"></span>
-          <span>[Placeholder: posterbeeld cinematic]</span>
         </button>
       </div>
     </section>
