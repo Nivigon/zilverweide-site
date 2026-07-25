@@ -36,9 +36,9 @@
      bijvoorbeeld href="mailto:speel@zilverweide.nl?subject=Aanmelding%20playtest%20Zilverweide".
 
   DEFINITIEF (geen plekhouders):
-  - beelden/splash.jpg  (herobeeld)
-  - beelden/heks.jpg    (eerste sfeerbeeld)
-  - beelden/og.jpg      (linkvoorbeeldbeeld, 1200x630, uitsnede van heks.jpg)
+  - beelden/rozensplash.jpeg  (herobeeld, titel zit in het beeld zelf)
+  - beelden/rozenimage1.jpeg  (eerste sfeerbeeld)
+  - beelden/og.jpg            (linkvoorbeeldbeeld, 1200x630, uitsnede van heks.jpg)
   - de favicon (gouden roosje als inline SVG, mag later vervangen worden)
 -->
 <html lang="nl">
@@ -111,7 +111,7 @@
       min-height: 100svh;
       display: flex;
       flex-direction: column;
-      justify-content: flex-end;
+      justify-content: center;
       overflow: hidden;
       animation: hero-fade 1.4s ease-out both;
     }
@@ -121,44 +121,65 @@
       to   { opacity: 1; }
     }
 
+    /* De titel zit in het herobeeld zelf. Op een staande telefoon tonen we
+       daarom het volledige beeld; op brede schermen vult het beeld het scherm. */
     .hero img {
-      position: absolute;
-      inset: 0;
+      display: block;
       width: 100%;
-      height: 100%;
-      object-fit: cover;
-      /* Uitsnede-middelpunt: beide figuren en het rozenveld in beeld houden */
-      object-position: 50% 30%;
-    }
-
-    .hero::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      /* Donker verloop onderaan zodat de titel leesbaar blijft */
-      background: linear-gradient(
-        to top,
-        var(--bg) 4%,
-        rgba(13, 10, 6, 0.82) 22%,
-        rgba(13, 10, 6, 0) 58%
-      );
+      height: auto;
     }
 
     .hero-tekst {
       position: relative;
       z-index: 1;
-      padding: 0 1.5rem 3.5rem;
+      padding: 1.75rem 1.5rem 0;
       text-align: center;
       max-width: 42rem;
       margin: 0 auto;
     }
 
-    .hero-tekst h1 {
-      color: var(--gold);
-      font-size: clamp(1.9rem, 8vw, 3.4rem);
-      letter-spacing: 0.06em;
-      line-height: 1.2;
-      text-shadow: 0 2px 18px rgba(0, 0, 0, 0.85);
+    /* De titel staat al in het herobeeld; deze blijft bestaan voor
+       zoekmachines en schermlezers maar is niet zichtbaar. */
+    .visueel-verborgen {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      margin: -1px;
+      padding: 0;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    /* Brede of liggende schermen: beeld schermvullend, heldenzin eroverheen */
+    @media (min-aspect-ratio: 6/5) {
+      .hero { justify-content: flex-end; }
+
+      .hero img {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        /* Uitsnede-middelpunt: titel en gedaante in beeld houden */
+        object-position: 50% 45%;
+      }
+
+      .hero::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        /* Donker verloop onderaan zodat de heldenzin leesbaar blijft */
+        background: linear-gradient(
+          to top,
+          var(--bg) 2%,
+          rgba(13, 10, 6, 0.7) 14%,
+          rgba(13, 10, 6, 0) 38%
+        );
+      }
+
+      .hero-tekst { padding-bottom: 3rem; }
     }
 
     .heldenzin {
@@ -369,7 +390,6 @@
       /* Op bredere schermen meer van het volledige (liggende) beeld tonen */
       .sfeer .beeld, .sfeer .plekhouder { aspect-ratio: 3 / 2; }
       main section { padding: 4.5rem 2rem; }
-      .hero-tekst { padding-bottom: 4.5rem; }
     }
 
     @media (min-width: 1100px) {
@@ -388,9 +408,9 @@
 
   <!-- 1. Hero -->
   <header class="hero">
-    <img src="beelden/splash.jpg" alt="Twee gedaanten in mantels in een veld vol gloeiende blauwe rozen bij nacht" fetchpriority="high">
+    <img src="beelden/rozensplash.jpeg" alt="Titelbeeld met de tekst De Rozen van Zilverweide in blauw gloeiende letters, met daarachter een gedaante met lichtende ogen" fetchpriority="high">
     <div class="hero-tekst">
-      <h1>De Rozen van Zilverweide</h1>
+      <h1 class="visueel-verborgen">De Rozen van Zilverweide</h1>
       <p class="heldenzin">Een speelbaar mysterie. Samen zoeken jullie de waarheid van een dorp dat zijn geheimen liever bewaart.</p>
     </div>
   </header>
@@ -436,7 +456,7 @@
             de uitsnede naar links en omhoog. Pas dit per <img> aan in het
             style-attribuut hieronder.
           -->
-          <img class="beeld" src="beelden/heks.jpg" style="object-position: 50% 35%;" alt="Een gehoornde gedaante met gloeiende blauwe ogen onder een kap" loading="lazy">
+          <img class="beeld" src="beelden/rozenimage1.jpeg" style="object-position: 60% 40%;" alt="Een gedaante met gloeiende blauwe ogen houdt een lichtgevende blauwe roos vast" loading="lazy">
         </figure>
         <figure>
           <!-- Vervangen: haal de <div> hieronder weg en gebruik in plaats
