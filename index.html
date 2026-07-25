@@ -85,8 +85,6 @@
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
-    html { scroll-behavior: smooth; }
-
     body {
       background: var(--bg);
       color: var(--parchment);
@@ -381,7 +379,6 @@
     /* ------- Rustig aan voor wie dat wil ------- */
 
     @media (prefers-reduced-motion: reduce) {
-      html { scroll-behavior: auto; }
       .hero { animation: none; }
       .film-start .play, .knop-instagram { transition: none; }
     }
