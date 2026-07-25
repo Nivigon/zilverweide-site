@@ -1,0 +1,485 @@
+<!doctype html>
+<!--
+  De Rozen van Zilverweide, teaserwebsite
+  =======================================
+
+  PLEKHOUDERS EN HOE JE ZE VERVANGT
+  (elke plekhouder is te vervangen door alleen een bron of link te wijzigen)
+
+  1. [Placeholder: cinematic film, mp4]
+     Waar: de <source> in de filmsectie (zoek op "cinematic film").
+     Vervangen: zet het pad naar de mp4 in het src-attribuut,
+     bijvoorbeeld src="beelden/cinematic.mp4".
+
+  2. [Placeholder: posterbeeld cinematic]
+     Waar: het poster-attribuut op het <video>-element.
+     Vervangen: zet daar het pad naar het posterbeeld,
+     bijvoorbeeld poster="beelden/poster.jpg". Het donkere
+     plekhoudervlak met de play-knop blijft gewoon werken en toont
+     dan het posterbeeld eronder zodra dat laadt.
+
+  3. [Placeholder: sfeerbeeld 2] t/m [Placeholder: sfeerbeeld 4]
+     Waar: de sfeerbeeldenreeks (zoek op "sfeerbeeld 2").
+     Vervangen: haal per beeld de <div class="plekhouder">-regel weg
+     en haal de commentaartekens rond de <img>-regel erboven weg,
+     vul dan het src-attribuut in. De uitsnede stuur je per beeld
+     met object-position (uitleg staat als commentaar bij heks.jpg).
+
+  4. [Placeholder: instagram-url]
+     Waar: het href-attribuut van de knop "Volg op Instagram".
+     Vervangen: zet daar de volledige Instagram-url,
+     bijvoorbeeld href="https://www.instagram.com/zilverweide".
+
+  5. [Placeholder: mailadres]
+     Waar: de mailto-link in het playtestzinnetje.
+     Vervangen: alleen het adres vervangen, het onderwerp laten staan,
+     bijvoorbeeld href="mailto:speel@zilverweide.nl?subject=Aanmelding%20playtest%20Zilverweide".
+
+  DEFINITIEF (geen plekhouders):
+  - beelden/splash.jpg  (herobeeld)
+  - beelden/heks.jpg    (eerste sfeerbeeld)
+  - beelden/og.jpg      (linkvoorbeeldbeeld, 1200x630, uitsnede van heks.jpg)
+  - de favicon (gouden roosje als inline SVG, mag later vervangen worden)
+-->
+<html lang="nl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>De Rozen van Zilverweide</title>
+  <meta name="description" content="Een speelbaar mysterie op locatie. Ieder een eigen rol, samen één waarheid. Binnenkort speelbaar.">
+  <meta name="theme-color" content="#0d0a06">
+
+  <!-- Open Graph (linkvoorbeeld in WhatsApp e.d.) -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="De Rozen van Zilverweide">
+  <meta property="og:description" content="Een speelbaar mysterie op locatie. Ieder een eigen rol, samen één waarheid. Binnenkort speelbaar.">
+  <meta property="og:url" content="https://zilverweide.nl/">
+  <meta property="og:image" content="https://zilverweide.nl/beelden/og.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="nl_NL">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="De Rozen van Zilverweide">
+  <meta name="twitter:description" content="Een speelbaar mysterie op locatie. Ieder een eigen rol, samen één waarheid. Binnenkort speelbaar.">
+  <meta name="twitter:image" content="https://zilverweide.nl/beelden/og.jpg">
+
+  <!-- Favicon: eenvoudig gouden roosje (inline SVG) -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230d0a06'/%3E%3Cg fill='none' stroke='%23c9a84c' stroke-width='3' stroke-linecap='round'%3E%3Ccircle cx='32' cy='30' r='16'/%3E%3Cpath d='M32 14a16 16 0 0 1 0 32'/%3E%3Cpath d='M32 22a8 8 0 1 1-8 8'/%3E%3Cpath d='M32 30l0 24'/%3E%3Cpath d='M32 46c-4-2-7-2-10-6'/%3E%3C/g%3E%3C/svg%3E">
+
+  <!-- Enige externe afhankelijkheid: Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #0d0a06;
+      --gold: #c9a84c;
+      --gold-dim: #8a6f32;
+      --parchment: #f5ead6;
+      /* Afgeleid van de koude gloed van de rozen in het beeldmateriaal */
+      --zilverblauw: #6fa9dd;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: var(--bg);
+      color: var(--parchment);
+      font-family: "Crimson Text", Georgia, serif;
+      font-size: 1.125rem;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1, h2 { font-family: Cinzel, Georgia, serif; font-weight: 600; }
+
+    a { color: var(--gold); }
+
+    :focus-visible {
+      outline: 2px solid var(--gold);
+      outline-offset: 3px;
+      border-radius: 2px;
+    }
+
+    /* ------- Hero ------- */
+
+    .hero {
+      position: relative;
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      overflow: hidden;
+      animation: hero-fade 1.4s ease-out both;
+    }
+
+    @keyframes hero-fade {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    .hero img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      /* Uitsnede-middelpunt: beide figuren en het rozenveld in beeld houden */
+      object-position: 50% 30%;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      /* Donker verloop onderaan zodat de titel leesbaar blijft */
+      background: linear-gradient(
+        to top,
+        var(--bg) 4%,
+        rgba(13, 10, 6, 0.82) 22%,
+        rgba(13, 10, 6, 0) 58%
+      );
+    }
+
+    .hero-tekst {
+      position: relative;
+      z-index: 1;
+      padding: 0 1.5rem 3.5rem;
+      text-align: center;
+      max-width: 42rem;
+      margin: 0 auto;
+    }
+
+    .hero-tekst h1 {
+      color: var(--gold);
+      font-size: clamp(1.9rem, 8vw, 3.4rem);
+      letter-spacing: 0.06em;
+      line-height: 1.2;
+      text-shadow: 0 2px 18px rgba(0, 0, 0, 0.85);
+    }
+
+    .heldenzin {
+      margin-top: 1.1rem;
+      font-style: italic;
+      font-size: clamp(1.1rem, 4.2vw, 1.35rem);
+      color: var(--parchment);
+      text-shadow: 0 1px 10px rgba(0, 0, 0, 0.9);
+    }
+
+    /* ------- Secties en scheidingslijnen ------- */
+
+    main section {
+      padding: 3.5rem 1.5rem;
+      max-width: 46rem;
+      margin: 0 auto;
+    }
+
+    .scheiding {
+      border: none;
+      height: 1px;
+      max-width: 16rem;
+      margin: 0 auto;
+      /* Zilverblauwe gloedlijn als tweede accent */
+      background: linear-gradient(to right, transparent, var(--zilverblauw), transparent);
+      box-shadow: 0 0 12px rgba(111, 169, 221, 0.45);
+      opacity: 0.55;
+    }
+
+    /* ------- Film ------- */
+
+    .film-kader {
+      position: relative;
+      aspect-ratio: 16 / 9;
+      background: #080604;
+      border: 1px solid rgba(138, 111, 50, 0.45);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .film-kader video {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      background: #080604;
+    }
+
+    .film-start {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1.1rem;
+      background:
+        radial-gradient(ellipse at center, rgba(111, 169, 221, 0.07), transparent 65%),
+        #0a0805;
+      border: none;
+      cursor: pointer;
+      font-family: "Crimson Text", Georgia, serif;
+      font-size: 1rem;
+      font-style: italic;
+      color: var(--gold-dim);
+    }
+
+    .film-start .play {
+      width: 4.25rem;
+      height: 4.25rem;
+      border: 2px solid var(--gold);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .film-start .play::after {
+      content: "";
+      display: block;
+      margin-left: 0.35rem;
+      border-style: solid;
+      border-width: 0.75rem 0 0.75rem 1.25rem;
+      border-color: transparent transparent transparent var(--gold);
+    }
+
+    .film-start:hover .play,
+    .film-start:focus-visible .play {
+      background: rgba(201, 168, 76, 0.12);
+      box-shadow: 0 0 22px rgba(111, 169, 221, 0.25);
+    }
+
+    .film-start[hidden] { display: none; }
+
+    /* ------- Verhaalblok ------- */
+
+    .verhaal p {
+      color: var(--parchment);
+      margin-bottom: 1.25rem;
+    }
+
+    .verhaal p:last-child {
+      margin-bottom: 0;
+      font-family: Cinzel, Georgia, serif;
+      color: var(--gold);
+      letter-spacing: 0.08em;
+      text-align: center;
+      font-size: 1.05rem;
+      margin-top: 2rem;
+    }
+
+    /* ------- Sfeerbeelden ------- */
+
+    .sfeer {
+      display: grid;
+      gap: 1.25rem;
+    }
+
+    .sfeer figure {
+      margin: 0;
+      overflow: hidden;
+      border-radius: 4px;
+      border: 1px solid rgba(138, 111, 50, 0.35);
+    }
+
+    .sfeer .beeld {
+      display: block;
+      width: 100%;
+      /* Staande of vierkante uitsnede op een smalle telefoon */
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
+    }
+
+    /* ------- Plekhouders (algemeen) ------- */
+
+    .plekhouder {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      background:
+        radial-gradient(ellipse at center, rgba(111, 169, 221, 0.05), transparent 70%),
+        #0a0805;
+      color: var(--gold-dim);
+      font-style: italic;
+      text-align: center;
+      padding: 1rem;
+    }
+
+    /* ------- Afsluiting ------- */
+
+    .afsluiting { text-align: center; }
+
+    .knop-instagram {
+      display: inline-block;
+      font-family: Cinzel, Georgia, serif;
+      font-size: 1.05rem;
+      letter-spacing: 0.1em;
+      color: var(--bg);
+      background: var(--gold);
+      text-decoration: none;
+      padding: 1rem 2.4rem;
+      border-radius: 3px;
+      transition: background-color 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .knop-instagram:hover,
+    .knop-instagram:focus-visible {
+      background: #d9bb64;
+      box-shadow: 0 0 26px rgba(201, 168, 76, 0.35);
+    }
+
+    .volgzin {
+      margin-top: 1.1rem;
+      font-style: italic;
+      color: var(--parchment);
+    }
+
+    .playtest {
+      margin-top: 2.75rem;
+      font-size: 0.95rem;
+      color: rgba(245, 234, 214, 0.75);
+      max-width: 30rem;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .playtest a { color: var(--gold-dim); }
+    .playtest a:hover, .playtest a:focus-visible { color: var(--gold); }
+
+    footer {
+      padding: 2.5rem 1.5rem 2rem;
+      text-align: center;
+      font-size: 0.85rem;
+      color: rgba(245, 234, 214, 0.45);
+    }
+
+    /* ------- Bredere schermen ------- */
+
+    @media (min-width: 700px) {
+      .sfeer {
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5rem;
+      }
+      /* Op bredere schermen meer van het volledige (liggende) beeld tonen */
+      .sfeer .beeld, .sfeer .plekhouder { aspect-ratio: 3 / 2; }
+      main section { padding: 4.5rem 2rem; }
+      .hero-tekst { padding-bottom: 4.5rem; }
+    }
+
+    @media (min-width: 1100px) {
+      main section { max-width: 52rem; }
+    }
+
+    /* ------- Rustig aan voor wie dat wil ------- */
+
+    @media (prefers-reduced-motion: reduce) {
+      .hero { animation: none; }
+      .film-start .play, .knop-instagram { transition: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 1. Hero -->
+  <header class="hero">
+    <img src="beelden/splash.jpg" alt="Twee gedaanten in mantels in een veld vol gloeiende blauwe rozen bij nacht" fetchpriority="high">
+    <div class="hero-tekst">
+      <h1>De Rozen van Zilverweide</h1>
+      <p class="heldenzin">Een speelbaar mysterie. Samen zoeken jullie de waarheid van een dorp dat zijn geheimen liever bewaart.</p>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- 2. De film -->
+    <section aria-label="Film">
+      <div class="film-kader">
+        <!--
+          Video begint pas te laden na een druk op play (preload="none").
+          Vervangen: alleen poster (op <video>) en src (op <source>) aanpassen.
+        -->
+        <video id="film" preload="none" playsinline poster="[Placeholder: posterbeeld cinematic]">
+          <source src="[Placeholder: cinematic film, mp4]" type="video/mp4">
+        </video>
+        <button class="film-start" id="film-start" aria-label="Film afspelen">
+          <span class="play" aria-hidden="true"></span>
+          <span>[Placeholder: posterbeeld cinematic]</span>
+        </button>
+      </div>
+    </section>
+
+    <hr class="scheiding" aria-hidden="true">
+
+    <!-- 3. Verhaalblok -->
+    <section class="verhaal" aria-label="Verhaal">
+      <p>Lang geleden brandde in Zilverweide een molen tot de grond toe af. Een ongeluk, zei men. Maar er zijn namen die sindsdien niemand meer hardop uitspreekt.</p>
+      <p>De Rozen van Zilverweide is een coöperatief mysterie dat je met je groep op locatie speelt. Ieder krijgt een eigen rol, een eigen scherm en een eigen stukje van de waarheid. Alleen samen leggen jullie bloot wat er die nacht werkelijk gebeurde.</p>
+      <p>Binnenkort speelbaar.</p>
+    </section>
+
+    <hr class="scheiding" aria-hidden="true">
+
+    <!-- 4. Sfeerbeelden -->
+    <section aria-label="Sfeerbeelden">
+      <div class="sfeer">
+        <figure>
+          <!--
+            object-position bepaalt het middelpunt van de uitsnede per beeld.
+            Eerste waarde is horizontaal, tweede verticaal (0% = links/boven,
+            50% = midden, 100% = rechts/onder). Voorbeeld: "35% 20%" schuift
+            de uitsnede naar links en omhoog. Pas dit per <img> aan in het
+            style-attribuut hieronder.
+          -->
+          <img class="beeld" src="beelden/heks.jpg" style="object-position: 50% 35%;" alt="Een gehoornde gedaante met gloeiende blauwe ogen onder een kap" loading="lazy">
+        </figure>
+        <figure>
+          <!-- Vervangen: haal de <div> hieronder weg en gebruik in plaats
+               daarvan een <img> zoals bij heks.jpg hierboven. -->
+          <div class="plekhouder">[Placeholder: sfeerbeeld 2]</div>
+        </figure>
+        <figure>
+          <div class="plekhouder">[Placeholder: sfeerbeeld 3]</div>
+        </figure>
+        <figure>
+          <div class="plekhouder">[Placeholder: sfeerbeeld 4]</div>
+        </figure>
+      </div>
+    </section>
+
+    <hr class="scheiding" aria-hidden="true">
+
+    <!-- 5. Afsluiting met acties -->
+    <section class="afsluiting" aria-label="Volgen en meespelen">
+      <a class="knop-instagram" href="[Placeholder: instagram-url]">Volg op Instagram</a>
+      <p class="volgzin">Volg ons en hoor als eerste wanneer het dorp zijn poorten opent.</p>
+      <p class="playtest">Eerder meespelen? Deze zomer spelen de eerste groepen. <a href="mailto:[Placeholder: mailadres]?subject=Aanmelding%20playtest%20Zilverweide">Stuur een berichtje</a> en test het mysterie als een van de eersten.</p>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>De Rozen van Zilverweide is een productie van Calovia.</p>
+  </footer>
+
+  <script>
+    // De film laadt en speelt pas na een bewuste druk op play, met geluid.
+    (function () {
+      var start = document.getElementById("film-start");
+      var video = document.getElementById("film");
+      start.addEventListener("click", function () {
+        start.hidden = true;
+        video.setAttribute("controls", "");
+        video.muted = false;
+        video.play().catch(function () {});
+      });
+    })();
+  </script>
+
+</body>
+</html>
