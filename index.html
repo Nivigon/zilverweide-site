@@ -346,17 +346,10 @@
       box-shadow: 0 0 26px rgba(201, 168, 76, 0.35);
     }
 
-    /* Pijl van de knop naar het Instagram-logo */
-    .pijl {
-      display: block;
-      width: 1.4rem;
-      height: 2.6rem;
-      margin: 1.1rem auto 0.9rem;
-      color: var(--gold-dim);
-    }
-
     .insta-logo {
-      display: inline-block;
+      display: block;
+      width: fit-content;
+      margin: 1.6rem auto 0;
       line-height: 0;
       border-radius: 22%;
       transition: filter 0.25s ease, transform 0.25s ease;
@@ -391,6 +384,14 @@
 
     .playtest a { color: var(--gold-dim); }
     .playtest a:hover, .playtest a:focus-visible { color: var(--gold); }
+
+    .groepsgrootte {
+      margin: 1.1rem auto 0;
+      font-size: 0.85rem;
+      font-style: italic;
+      color: rgba(245, 234, 214, 0.55);
+      max-width: 28rem;
+    }
 
     footer {
       padding: 2.5rem 1.5rem 2rem;
@@ -503,14 +504,12 @@
     <!-- 5. Afsluiting met acties -->
     <section class="afsluiting" aria-label="Volgen en meespelen">
       <a class="knop-instagram" href="https://www.instagram.com/zilverweide">Volg op Instagram</a>
-      <svg class="pijl" viewBox="0 0 24 44" aria-hidden="true">
-        <path d="M12 2v34m0 0l-8-9m8 9l8-9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
       <a class="insta-logo" href="https://www.instagram.com/zilverweide" aria-label="Naar het Instagram-account van De Rozen van Zilverweide">
         <img src="beelden/Instagram_Glyph_Gradient.svg" alt="">
       </a>
       <p class="volgzin">Volg ons en hoor als eerste wanneer het dorp zijn poorten opent.</p>
       <p class="playtest">Eerder meespelen? Deze zomer spelen de eerste groepen. <a href="mailto:speel@zilverweide.nl?subject=Aanmelding%20playtest%20Zilverweide">Stuur een berichtje</a> en test het mysterie als een van de eersten.</p>
+      <p class="groepsgrootte">Meestal gespeeld met groepen van 4 tot 8. Met meer of minder? Stuur gerust een berichtje, dan kijken we wat past.</p>
     </section>
 
   </main>
