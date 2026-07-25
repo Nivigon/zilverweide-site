@@ -6,30 +6,21 @@
   PLEKHOUDERS EN HOE JE ZE VERVANGT
   (elke plekhouder is te vervangen door alleen een bron of link te wijzigen)
 
-  1. [Placeholder: cinematic film, mp4]
-     Waar: de <source> in de filmsectie (zoek op "cinematic film").
-     Vervangen: zet het pad naar de mp4 in het src-attribuut,
-     bijvoorbeeld src="beelden/cinematic.mp4".
-
-  2. [Placeholder: posterbeeld cinematic]
+  1. [Placeholder: posterbeeld cinematic]
      Waar: het poster-attribuut op het <video>-element.
      Vervangen: zet daar het pad naar het posterbeeld,
      bijvoorbeeld poster="beelden/poster.jpg". Het donkere
      plekhoudervlak met de play-knop blijft gewoon werken en toont
      dan het posterbeeld eronder zodra dat laadt.
 
-  3. [Placeholder: instagram-url]
-     Waar: op twee plekken in de afsluiting: het href-attribuut van de
-     knop "Volg op Instagram" en het href-attribuut van het
-     Instagram-logo eronder. Op beide plekken dezelfde url invullen,
-     bijvoorbeeld href="https://www.instagram.com/zilverweide".
-
-  4. [Placeholder: mailadres]
+  2. [Placeholder: mailadres]
      Waar: de mailto-link in het playtestzinnetje.
      Vervangen: alleen het adres vervangen, het onderwerp laten staan,
      bijvoorbeeld href="mailto:speel@zilverweide.nl?subject=Aanmelding%20playtest%20Zilverweide".
 
   DEFINITIEF (geen plekhouders):
+  - beelden/cinematic.mp4     (de film; laadt pas na een druk op play)
+  - de Instagram-link (https://www.instagram.com/zilverweide, op de knop en het logo)
   - beelden/rozensplash.jpeg  (herobeeld, titel zit in het beeld zelf)
   - beelden/rozenimage1.jpeg  (los dreigingsbeeld tussen verhaal en portretten)
   - beelden/felix.jpg, fenna.jpg, jan.jpg, kelly.jpg  (de vier rollen)
@@ -460,7 +451,7 @@
           Vervangen: alleen poster (op <video>) en src (op <source>) aanpassen.
         -->
         <video id="film" preload="none" playsinline poster="[Placeholder: posterbeeld cinematic]">
-          <source src="[Placeholder: cinematic film, mp4]" type="video/mp4">
+          <source src="beelden/cinematic.mp4" type="video/mp4">
         </video>
         <button class="film-start" id="film-start" aria-label="Film afspelen">
           <span class="play" aria-hidden="true"></span>
@@ -516,11 +507,11 @@
 
     <!-- 5. Afsluiting met acties -->
     <section class="afsluiting" aria-label="Volgen en meespelen">
-      <a class="knop-instagram" href="[Placeholder: instagram-url]">Volg op Instagram</a>
+      <a class="knop-instagram" href="https://www.instagram.com/zilverweide">Volg op Instagram</a>
       <svg class="pijl" viewBox="0 0 24 44" aria-hidden="true">
         <path d="M12 2v34m0 0l-8-9m8 9l8-9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
-      <a class="insta-logo" href="[Placeholder: instagram-url]" aria-label="Naar het Instagram-account van De Rozen van Zilverweide">
+      <a class="insta-logo" href="https://www.instagram.com/zilverweide" aria-label="Naar het Instagram-account van De Rozen van Zilverweide">
         <img src="beelden/Instagram_Glyph_Gradient.svg" alt="">
       </a>
       <p class="volgzin">Volg ons en hoor als eerste wanneer het dorp zijn poorten opent.</p>
