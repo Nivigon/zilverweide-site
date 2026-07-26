@@ -89,12 +89,13 @@
 
     .hero {
       position: relative;
-      min-height: 100svh;
       display: flex;
       flex-direction: column;
-      justify-content: center;
       overflow: hidden;
       animation: hero-fade 1.4s ease-out both;
+      /* Op smalle schermen geen schermvullende hero: zo blijft de
+         videospeler net in beeld en is duidelijk dat er meer volgt */
+      padding-top: 0.5rem;
     }
 
     @keyframes hero-fade {
@@ -135,7 +136,11 @@
 
     /* Brede of liggende schermen: beeld schermvullend, heldenzin eroverheen */
     @media (min-aspect-ratio: 6/5) {
-      .hero { justify-content: flex-end; }
+      .hero {
+        min-height: 100svh;
+        justify-content: flex-end;
+        padding-top: 0;
+      }
 
       .hero img {
         position: absolute;
@@ -171,6 +176,25 @@
       text-shadow: 0 1px 10px rgba(0, 0, 0, 0.9);
     }
 
+    /* Zachte scrollhint, alleen op smalle staande schermen */
+    .scroll-hint {
+      display: block;
+      width: 1.5rem;
+      height: 0.85rem;
+      margin: 1.5rem auto 0;
+      color: var(--gold-dim);
+      animation: hint-zweef 2.8s ease-in-out infinite;
+    }
+
+    @keyframes hint-zweef {
+      0%, 100% { transform: translateY(0); opacity: 0.5; }
+      50%      { transform: translateY(5px); opacity: 0.85; }
+    }
+
+    @media (min-aspect-ratio: 6/5), (min-width: 700px) {
+      .scroll-hint { display: none; }
+    }
+
     /* ------- Secties en scheidingslijnen ------- */
 
     main section {
@@ -191,6 +215,12 @@
     }
 
     /* ------- Film ------- */
+
+    /* Op smalle staande schermen dichter onder de hero,
+       zodat de speler direct in beeld komt */
+    @media (max-aspect-ratio: 6/5) and (max-width: 699px) {
+      main section.film-sectie { padding-top: 1.5rem; }
+    }
 
     .film-kader {
       position: relative;
@@ -436,6 +466,7 @@
     @media (prefers-reduced-motion: reduce) {
       .hero { animation: none; }
       .film-start .play, .knop-instagram { transition: none; }
+      .scroll-hint { animation: none; opacity: 0.6; }
     }
   </style>
 </head>
@@ -447,13 +478,16 @@
     <div class="hero-tekst">
       <h1 class="visueel-verborgen">De Rozen van Zilverweide</h1>
       <p class="heldenzin">Een speelbaar mysterie. Samen zoeken jullie de waarheid van een dorp dat zijn eigen geheimen niet kent.</p>
+      <svg class="scroll-hint" viewBox="0 0 24 12" aria-hidden="true">
+        <path d="M2 2l10 8 10-8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
     </div>
   </header>
 
   <main>
 
     <!-- 2. De film -->
-    <section aria-label="Film">
+    <section class="film-sectie" aria-label="Film">
       <div class="film-kader">
         <!--
           Video begint pas te laden na een druk op play (preload="none").
