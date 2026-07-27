@@ -383,15 +383,20 @@
       max-width: 30rem;
     }
 
-    /* ------- Wat de eerste spelers zeiden ------- */
+    /* ------- De eerste testers zeiden ------- */
 
-    .reacties { text-align: center; }
+    /* Bewust compact gehouden, zodat de afsluiting snel in beeld komt */
+    main section.reacties {
+      text-align: center;
+      padding-top: 1.5rem;
+      padding-bottom: 2.5rem;
+    }
 
     .reacties-kop {
       color: var(--gold);
       font-size: clamp(1.15rem, 4vw, 1.35rem);
       letter-spacing: 0.12em;
-      margin-bottom: 2.25rem;
+      margin-bottom: 1.4rem;
     }
 
     .reacties blockquote {
@@ -399,17 +404,15 @@
       max-width: 30rem;
     }
 
-    .reacties blockquote + blockquote { margin-top: 2.5rem; }
-
-    /* Subtiel gouden aanhalingsteken boven elke quote */
-    .reacties blockquote::before {
+    /* Subtiel gouden aanhalingsteken, strak tegen de eerste quote */
+    .reacties blockquote:first-of-type::before {
       content: "\201C";
       display: block;
       font-family: Cinzel, Georgia, serif;
-      font-size: 2rem;
-      line-height: 0.6;
+      font-size: 1.6rem;
+      line-height: 0.5;
       color: var(--gold-dim);
-      margin-bottom: 0.55rem;
+      margin-bottom: 0.35rem;
     }
 
     .reacties blockquote p {
@@ -418,10 +421,14 @@
       color: var(--parchment);
     }
 
-    .reacties blockquote footer {
-      margin-top: 0.5rem;
-      font-size: 0.85rem;
-      color: rgba(245, 234, 214, 0.55);
+    /* Klein goudgedimd lijntje tussen de twee quotes */
+    .mini-scheiding {
+      border: none;
+      height: 1px;
+      max-width: 7rem;
+      margin: 1.2rem auto;
+      background: linear-gradient(to right, transparent, var(--gold-dim), transparent);
+      opacity: 0.7;
     }
 
     /* ------- Afsluiting ------- */
@@ -598,18 +605,18 @@
       <p class="samen-tekst">Loop door Zilverweide, samen, ieder met een eigen scherm of gedeeld aan één tablet. Een park, een tuin, of gewoon jullie eigen huiskamer wordt het dorp.</p>
     </section>
 
-    <!-- 4d. Wat de eerste spelers zeiden
+    <!-- 4d. De eerste testers zeiden
          (na testronde 2 de twee voorbeeldquotes vervangen door echte
-         uitspraken van spelers, alleen de tekst en het label wijzigen) -->
-    <section class="reacties" aria-label="Wat de eerste spelers zeiden">
-      <h2 class="reacties-kop">Wat de eerste spelers zeiden</h2>
+         uitspraken van spelers; met toestemming mag er een voornaam
+         onder, in een klein gedempt regeltje) -->
+    <section class="reacties" aria-label="De eerste testers zeiden">
+      <h2 class="reacties-kop">De eerste testers zeiden</h2>
       <blockquote>
         <p>Halverwege wist ik niet meer wie ik nog kon geloven.</p>
-        <footer>Een speler uit de eerste groep</footer>
       </blockquote>
+      <hr class="mini-scheiding" aria-hidden="true">
       <blockquote>
         <p>Je vergeet gewoon dat je in een tuin staat. Ineens ben je er middenin.</p>
-        <footer>Een speler uit de eerste groep</footer>
       </blockquote>
     </section>
 
