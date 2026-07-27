@@ -383,6 +383,47 @@
       max-width: 30rem;
     }
 
+    /* ------- Wat de eerste spelers zeiden ------- */
+
+    .reacties { text-align: center; }
+
+    .reacties-kop {
+      color: var(--gold);
+      font-size: clamp(1.15rem, 4vw, 1.35rem);
+      letter-spacing: 0.12em;
+      margin-bottom: 2.25rem;
+    }
+
+    .reacties blockquote {
+      margin: 0 auto;
+      max-width: 30rem;
+    }
+
+    .reacties blockquote + blockquote { margin-top: 2.5rem; }
+
+    /* Subtiel gouden aanhalingsteken boven elke quote */
+    .reacties blockquote::before {
+      content: "\201C";
+      display: block;
+      font-family: Cinzel, Georgia, serif;
+      font-size: 2rem;
+      line-height: 0.6;
+      color: var(--gold-dim);
+      margin-bottom: 0.55rem;
+    }
+
+    .reacties blockquote p {
+      font-style: italic;
+      font-size: 1.1rem;
+      color: var(--parchment);
+    }
+
+    .reacties blockquote footer {
+      margin-top: 0.5rem;
+      font-size: 0.85rem;
+      color: rgba(245, 234, 214, 0.55);
+    }
+
     /* ------- Afsluiting ------- */
 
     .afsluiting { text-align: center; }
@@ -555,6 +596,21 @@
         <img src="beelden/samen-spelen.jpeg" alt="Twee spelers gebogen over één tablet in een veld in de schemering" loading="lazy">
       </figure>
       <p class="samen-tekst">Loop door Zilverweide, samen, ieder met een eigen scherm of gedeeld aan één tablet. Een park, een tuin, of gewoon jullie eigen huiskamer wordt het dorp.</p>
+    </section>
+
+    <!-- 4d. Wat de eerste spelers zeiden
+         (na testronde 2 de twee voorbeeldquotes vervangen door echte
+         uitspraken van spelers, alleen de tekst en het label wijzigen) -->
+    <section class="reacties" aria-label="Wat de eerste spelers zeiden">
+      <h2 class="reacties-kop">Wat de eerste spelers zeiden</h2>
+      <blockquote>
+        <p>Halverwege wist ik niet meer wie ik nog kon geloven.</p>
+        <footer>Een speler uit de eerste groep</footer>
+      </blockquote>
+      <blockquote>
+        <p>Je vergeet gewoon dat je in een tuin staat. Ineens ben je er middenin.</p>
+        <footer>Een speler uit de eerste groep</footer>
+      </blockquote>
     </section>
 
     <hr class="scheiding" aria-hidden="true">
